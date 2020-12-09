@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "vnn-rating"
+    }
+  },
+  "defaultProject": "vnn-rating",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
