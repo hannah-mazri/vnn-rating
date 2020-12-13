@@ -5,6 +5,9 @@
 <!--      <h2>Game List</h2>-->
 <!--      <h2>App List</h2>-->
 
+      <button (click)="startRandomRate()" *ngIf="showRandomRateButton">Random Rating</button>
+      <button (click)="stopRandomRate()" *ngIf="!showRandomRateButton">Stop Random Rating</button>
+
       <div class="card mb-3 p-3" *ngFor="let movie of movies | async">
         {{ movie.title }} with rating of {{ movie.rating }} ({{ movie.numberOfVotes }} votes)
         <button (click)="rateMovie(movie)">Rate Movie</button>
