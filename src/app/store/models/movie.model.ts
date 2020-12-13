@@ -3,5 +3,6 @@ export interface Movie {
   title: string;
   // description: string;
   rating?: number;
+  newRating: number;
   numberOfVotes?: number;
 }

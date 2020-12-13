@@ -16,6 +16,8 @@ export class MovieComponent implements OnInit {
   movies: Observable<Movie[]>;
   showRandomRateButton = true;
 
+  newRating = 0;
+
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -24,12 +26,13 @@ export class MovieComponent implements OnInit {
     this.store.dispatch(new LoadMovieAction());
   }
 
-  rateMovie(selectedMovie) {
+  // todo: highlight card on rated movie
+  rateMovie(selectedMovie, addedRating) {
     const newVoteCount = selectedMovie.numberOfVotes + 1;
     // console.log(`current rating is ${selectedMovie.rating}`);
     // console.log(`current number of votes is ${selectedMovie.numberOfVotes}`);
     // console.log(`new vote count is ${newVoteCount}`);
-    const newRating = ((((selectedMovie.rating * selectedMovie.numberOfVotes) + 5) / newVoteCount).toFixed(2));
+    const newRating = ((((selectedMovie.rating * selectedMovie.numberOfVotes) + addedRating) / newVoteCount).toFixed(2));
     const copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
     this.store.dispatch(new RateMovieAction(copiedList));
   }
@@ -60,5 +63,10 @@ export class MovieComponent implements OnInit {
 
   getRandomValue(min, max) {
     return Math.round(Math.random() * (max - min) + min);
+  }
+
+  onRatingChanged(rating) {
+    console.log(rating);
+    this.newRating = rating;
   }
 }
