@@ -12,20 +12,36 @@ import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {MovieEffects} from './store/effects/movie.effect';
 import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatButtonModule} from '@angular/material/button';
+import {StarRatingComponent} from './movie/components/star-rating/star-rating.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieComponent
+    MovieComponent,
+    StarRatingComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ movie: MovieReducer }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({movie: MovieReducer}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     HttpClientModule,
-    EffectsModule.forRoot([MovieEffects])
+    EffectsModule.forRoot([MovieEffects]),
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
