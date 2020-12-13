@@ -1,19 +1,14 @@
 <div id="wrapper">
-
   <div id="shopping-list">
     <div id="list">
       <h2>Movie List</h2>
 <!--      <h2>Game List</h2>-->
 <!--      <h2>App List</h2>-->
 
-      <ul>
-        <li *ngFor="let movie of movies | async">
-          {{ movie.title }} with rating of {{ movie.rating }} ({{ movie.numberOfVotes }} votes)
-
-          <button (click)="rateMovie(movie)">Rate Movie</button>
-        </li>
-      </ul>
+      <div class="card mb-3 p-3" *ngFor="let movie of movies | async">
+        {{ movie.title }} with rating of {{ movie.rating }} ({{ movie.numberOfVotes }} votes)
+        <button (click)="rateMovie(movie)">Rate Movie</button>
+      </div>
     </div>
   </div>
-
 </div>
