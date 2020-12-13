@@ -9,6 +9,9 @@ import {FormsModule} from '@angular/forms';
 import {MovieReducer} from './store/reducers/movie.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import {EffectsModule} from '@ngrx/effects';
+import {MovieEffects} from './store/effects/movie.effect';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import {environment} from '../environments/environment';
     FormsModule,
     AppRoutingModule,
     StoreModule.forRoot({ movie: MovieReducer }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    HttpClientModule,
+    EffectsModule.forRoot([MovieEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

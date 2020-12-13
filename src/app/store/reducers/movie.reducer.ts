@@ -4,7 +4,7 @@ import {Movie} from '../models/movie.model';
 const initialState: Movie[] = [
   {
     id: 0,
-    title: 'Sherlock Holmes',
+    title: 'Sherlock Holmes (2009)',
     rating: 4.5,
     numberOfVotes: 1
   },
@@ -40,18 +40,12 @@ const initialState: Movie[] = [
   },
   {
     id: 6,
-    title: 'Knives Out',
-    rating: 4.8,
-    numberOfVotes: 1
-  },
-  {
-    id: 7,
     title: 'Thor: Ragnarok',
     rating: 4.8,
     numberOfVotes: 1
   },
   {
-    id: 8,
+    id: 7,
     title: 'Gattaca',
     rating: 4.7,
     numberOfVotes: 1
@@ -72,8 +66,12 @@ const initialState: Movie[] = [
 
 export function MovieReducer(state: Movie[] = initialState, action: MovieAction) {
   switch (action.type) {
+    case MovieActionTypes.LOAD_MOVIE:
+      return [...state].sort(((a, b) => b.rating - a.rating));
     case MovieActionTypes.RATE_MOVIE:
-      return [...state, action.payload];
+      const idx = state.findIndex(item => item.id === action.payload.id);
+      const newRating = [...state.slice(0, idx), action.payload, ...state.slice(idx + 1)];
+      return newRating.sort((a, b) => b.rating - a.rating);
     default:
       return state;
   }
