@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Movie} from '../movie/movie.model';
+import {delay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class MovieService {
   }
 
   getFavoriteMovies() {
-    return this.http.get<Movie[]>('../assets/movies.json');
+    return this.http.get<Movie[]>('../assets/movies.json')
+      .pipe(
+        delay(500)
+      );
   }
 
   // rateMovie(selectedMovie) {

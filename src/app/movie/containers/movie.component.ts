@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {interval, Observable, of, Subject, Subscription, timer} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../store/models/app-state.model';
 import {map, take, takeUntil, takeWhile} from 'rxjs/operators';
 import {Movie} from '../movie.model';
 import {LoadMovieAction, RateMovieAction} from '../store/movie.action';
+import {AppState} from '../../reducers';
 
 @Component({
   selector: 'app-movie-list',
@@ -15,6 +15,8 @@ import {LoadMovieAction, RateMovieAction} from '../store/movie.action';
 export class MovieComponent implements OnInit {
 
   movies: Observable<Movie[]>;
+  loading$: Observable<Boolean>;
+  error$: Observable<Error>;
 
   showRandomRateButton = true;
   randomIndex;
@@ -27,7 +29,9 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.movies = this.store.select(store => store.movie);
+    this.movies = this.store.select(store => store.movie.list);
+    this.loading$ = this.store.select(store => store.movie.loading);
+    this.error$ = this.store.select(store => store.movie.error);
 
     this.store.dispatch(new LoadMovieAction());
   }

@@ -10,7 +10,7 @@
 
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel class="bg-dark" *ngFor="let movie of movies | async; let idx = index" [expanded]="step === idx" (opened)="setStep(idx)" hideToggle>
-          <mat-expansion-panel-header class="jstfy">
+          <mat-expansion-panel-header [class.loading]="(loading$ | async)">
             <mat-panel-title class="text-light">
               {{ movie.title }}
             </mat-panel-title>

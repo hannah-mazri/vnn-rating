@@ -9,11 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {MovieModule} from './movie/movie.module';
 import { StoreModule } from '@ngrx/store';
-import {metaReducers, reducers} from './reducers';
+import { reducers, metaReducers} from './reducers';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
-import {MovieEffects} from './movie/movie.effect';
+import {MovieReducer} from './movie/store/movie.reducer';
+import {MovieEffects} from './movie/store/movie.effect';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,8 @@ import {MovieEffects} from './movie/movie.effect';
     AppRoutingModule,
 
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([MovieEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    // EffectsModule.forRoot([MovieEffects]),
 
     SharedModule,
     MovieModule,

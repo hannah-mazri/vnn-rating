@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "title": "Sherlock Holmes",
+    "title": "Sherlock Holmes (2009)",
     "rating": 4.5,
     "numberOfVotes": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "id": 6,
-    "title": "Knives Out",
+    "title": "Sherlock Holmes (2011)",
     "rating": 4.8,
     "numberOfVotes": 1
   },
@@ -45,12 +45,6 @@
     "id": 7,
     "title": "Thor: Ragnarok",
     "rating": 4.8,
-    "numberOfVotes": 1
-  },
-  {
-    "id": 8,
-    "title": "Gattaca",
-    "rating": 4.7,
     "numberOfVotes": 1
   },
   {
