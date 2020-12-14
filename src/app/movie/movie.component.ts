@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {interval, Observable, of, timer} from 'rxjs';
+import {interval, Observable, of, Subject, Subscription, timer} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {Movie} from '../store/models/movie.model';
 import {AppState} from '../store/models/app-state.model';
@@ -15,14 +15,13 @@ import {map, take, takeUntil, takeWhile} from 'rxjs/operators';
 export class MovieComponent implements OnInit {
 
   movies: Observable<Movie[]>;
-  loading$: Observable<Boolean> = of(false);
+
   showRandomRateButton = true;
   randomIndex;
 
-
   newRating = 0;
-
   step = null;
+  subscription: Subscription;
 
   constructor(private store: Store<AppState>) {
   }
@@ -53,15 +52,16 @@ export class MovieComponent implements OnInit {
   }
 
   startRandomRate() {
-    const timer$ = timer(10000);
+    this.showRandomRateButton = false;
+
     let randomMovie;
     let randomRating;
     let myMovies;
 
     this.movies.subscribe(result => myMovies = result);
 
-    const myObservable = interval(1000 + (Math.random() * 4000)).pipe(
-      takeUntil(timer$),
+    this.subscription = interval(1000 + (Math.random() * 4000)).pipe(
+      // takeUntil(this.unsubscribed$),
       map(() => {
         this.randomIndex = this.getRandomValue(0, 9);
         randomRating = this.getRandomValue(1, 5);
@@ -77,12 +77,8 @@ export class MovieComponent implements OnInit {
         console.log('random rating', randomRating);
         console.log('copiedList', copiedList);
       })
-    );
+    ).subscribe();
 
-    myObservable.subscribe();
-
-
-    this.showRandomRateButton = false;
     // this.loading$ = of(true);
     // let randomMovie;
     // const randomIndex = this.getRandomValue(0, 9);
@@ -104,7 +100,7 @@ export class MovieComponent implements OnInit {
   }
 
   stopRandomRate() {
-    // this.loading$ = of(false);
+    this.subscription.unsubscribe();
     this.showRandomRateButton = true;
   }
 
