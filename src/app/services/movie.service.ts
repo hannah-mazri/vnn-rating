@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Movie} from '../movie/movie.model';
 import {delay} from 'rxjs/operators';
 
@@ -19,11 +19,15 @@ export class MovieService {
       );
   }
 
-  // rateMovie(selectedMovie) {
-    // let newVoteCount = selectedMovie.numberOfVotes + 1;
-    // let newRating = (((selectedMovie.rating * selectedMovie.numberOfVotes) + 5) / newVoteCount).toFixed(1);
-    // let copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
+  rateMovie(selectedMovie, addedRating) {
+    const newVoteCount = selectedMovie.numberOfVotes + 1;
+    // console.log(`current rating is ${selectedMovie.rating}`);
+    // console.log(`current number of votes is ${selectedMovie.numberOfVotes}`);
+    // console.log(`new vote count is ${newVoteCount}`);
+    const newRating = ((((selectedMovie.rating * selectedMovie.numberOfVotes) + addedRating) / newVoteCount).toFixed(2));
+    const copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
 
-    // return {};
-  // }
+    // console.log('copiedList', copiedList);
+    return of(copiedList);
+  }
 }

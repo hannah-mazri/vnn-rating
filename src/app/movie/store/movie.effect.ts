@@ -1,9 +1,16 @@
-import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
+import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, concatMap, map, mergeMap, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {LoadMovieAction, LoadMovieFailureAction, LoadMovieSuccessAction, MovieActionTypes} from './movie.action';
+import {
+  LoadMovieAction,
+  LoadMovieFailureAction,
+  LoadMovieSuccessAction,
+  MovieActionTypes,
+  RateMovieAction, RateMovieFailureAction, RateMovieSuccessAction
+} from './movie.action';
 import {MovieService} from '../../services/movie.service';
+import {Movie} from '../movie.model';
 
 @Injectable()
 export class MovieEffects {
@@ -22,5 +29,17 @@ export class MovieEffects {
           catchError(error => of(new LoadMovieFailureAction(error)))
         )
     )
+  );
+
+  @Effect() rateMovie$ = this.actions$.pipe(
+    ofType<RateMovieAction>(MovieActionTypes.RATE_MOVIE),
+    map((action: RateMovieAction) => action.payload),
+    switchMap(payload => this.movieService.rateMovie(payload.selectedMovie, payload.addedRating)
+      .pipe(
+        concatMap((movie: Movie) => [
+          new RateMovieSuccessAction(movie),
+        ]),
+        catchError(error => of(new RateMovieFailureAction(error)))
+      )),
   );
 }

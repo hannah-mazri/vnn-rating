@@ -15,11 +15,10 @@ import {AppState} from '../../reducers';
 export class MovieComponent implements OnInit {
 
   movies: Observable<Movie[]>;
-  loading$: Observable<Boolean>;
+  loading$: Observable<boolean>;
   error$: Observable<Error>;
 
   showRandomRateButton = true;
-  randomIndex;
 
   newRating = 0;
   step = null;
@@ -36,56 +35,38 @@ export class MovieComponent implements OnInit {
     this.store.dispatch(new LoadMovieAction());
   }
 
-  // todo: highlight card on rated movie
-
   onRatingChanged(rating) {
-    console.log(rating);
     this.newRating = rating;
   }
 
   rateMovie(selectedMovie, addedRating) {
-    const newVoteCount = selectedMovie.numberOfVotes + 1;
-    // console.log(`current rating is ${selectedMovie.rating}`);
-    // console.log(`current number of votes is ${selectedMovie.numberOfVotes}`);
-    // console.log(`new vote count is ${newVoteCount}`);
-    const newRating = ((((selectedMovie.rating * selectedMovie.numberOfVotes) + addedRating) / newVoteCount).toFixed(2));
-    const copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
-    this.store.dispatch(new RateMovieAction(copiedList));
-
+    this.store.dispatch(new RateMovieAction({ selectedMovie, addedRating }));
     this.step = null;
   }
 
   startRandomRate() {
     this.showRandomRateButton = false;
 
-    let randomMovie;
-    let randomRating;
-    let myMovies;
-
-    this.movies.subscribe(result => myMovies = result);
+    let movies;
+    this.movies.subscribe(result => movies = result);
 
     this.subscription = interval(1000 + (Math.random() * 4000)).pipe(
       map(() => {
-        this.randomIndex = this.getRandomValue(0, 9);
-        randomRating = this.getRandomValue(1, 5);
+        const randomIndex = this.getRandomValue(0, 9);
+        const randomRating = this.getRandomValue(1, 5);
 
-        console.log('rand', this.randomIndex);
+        console.log('rand', randomIndex);
+        const randomMovie = movies[randomIndex];
+        console.log('rand mov', randomMovie);
 
-        randomMovie = myMovies[this.randomIndex];
-        const newVoteCount = randomMovie.numberOfVotes + 1;
-        const newRating = (((randomMovie.rating * randomMovie.numberOfVotes) + randomRating) / newVoteCount).toFixed(2);
-        const copiedList = {...randomMovie, rating: newRating, numberOfVotes: newVoteCount};
-        this.store.dispatch(new RateMovieAction(copiedList));
-        console.log('random movie', randomMovie);
-        console.log('random rating', randomRating);
-        console.log('copiedList', copiedList);
+        this.store.dispatch(new RateMovieAction({ selectedMovie: randomMovie, addedRating: randomRating }));
       })
     ).subscribe();
   }
 
   stopRandomRate() {
-    this.subscription.unsubscribe();
     this.showRandomRateButton = true;
+    this.subscription.unsubscribe();
   }
 
   getRandomValue(min, max) {

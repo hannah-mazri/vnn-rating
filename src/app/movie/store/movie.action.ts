@@ -35,7 +35,7 @@ export class LoadMovieFailureAction implements Action {
 export class RateMovieAction implements Action {
   readonly type = MovieActionTypes.RATE_MOVIE;
 
-  constructor(public payload: Movie) {
+  constructor(public payload: { selectedMovie: Movie, addedRating: number }) {
   }
 }
 export class RateMovieSuccessAction implements Action {
