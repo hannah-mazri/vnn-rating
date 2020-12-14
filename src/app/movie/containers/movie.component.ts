@@ -14,21 +14,20 @@ import {AppState} from '../../reducers';
 
 export class MovieComponent implements OnInit {
 
-  movies: Observable<Movie[]>;
+  movies$: Observable<Movie[]>;
   loading$: Observable<boolean>;
   error$: Observable<Error>;
+  subscription: Subscription;
 
-  showRandomRateButton = true;
-
+  isRandomRating = false;
   newRating = 0;
   step = null;
-  subscription: Subscription;
 
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.movies = this.store.select(store => store.movie.list);
+    this.movies$ = this.store.select(store => store.movie.list);
     this.loading$ = this.store.select(store => store.movie.loading);
     this.error$ = this.store.select(store => store.movie.error);
 
@@ -45,10 +44,10 @@ export class MovieComponent implements OnInit {
   }
 
   startRandomRate() {
-    this.showRandomRateButton = false;
+    this.isRandomRating = true;
 
     let movies;
-    this.movies.subscribe(result => movies = result);
+    this.movies$.subscribe(result => movies = result);
 
     this.subscription = interval(1000 + (Math.random() * 4000)).pipe(
       map(() => {
@@ -65,7 +64,7 @@ export class MovieComponent implements OnInit {
   }
 
   stopRandomRate() {
-    this.showRandomRateButton = true;
+    this.isRandomRating = false;
     this.subscription.unsubscribe();
   }
 

@@ -28,6 +28,6 @@ export class MovieService {
     const copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
 
     // console.log('copiedList', copiedList);
-    return of(copiedList);
+    return of(copiedList).pipe(delay(500));
   }
 }

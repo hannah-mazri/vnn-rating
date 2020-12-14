@@ -10,10 +10,6 @@ export enum MovieActionTypes {
   RATE_MOVIE = '[Movie] Rate Movie',
   RATE_MOVIE_SUCCESS = '[Movie] Rate Movie Success',
   RATE_MOVIE_FAILURE = '[Movie] Rate Movie Failure',
-
-  STOP_RANDOM_RATE = '[Movie] Stop Random Rate',
-  STOP_RANDOM_RATE_SUCCESS = '[Movie] Stop Random Rate Success',
-  STOP_RANDOM_RATE_FAILURE = '[Movie] Stop Random Rate Failure',
 }
 
 export class LoadMovieAction implements Action {
@@ -51,31 +47,9 @@ export class RateMovieFailureAction implements Action {
   }
 }
 
-export class StopRandomRateAction implements Action {
-  readonly type = MovieActionTypes.STOP_RANDOM_RATE;
-
-  constructor(public payload: Movie) {
-  }
-}
-export class StopRandomRateSuccessAction implements Action {
-  readonly type = MovieActionTypes.STOP_RANDOM_RATE_SUCCESS;
-
-  constructor(public payload: Movie[]) {
-  }
-}
-export class StopRandomRateFailureAction implements Action {
-  readonly type = MovieActionTypes.STOP_RANDOM_RATE_FAILURE;
-
-  constructor(public payload: Error) {
-  }
-}
-
 export type MovieAction = LoadMovieAction |
   LoadMovieSuccessAction |
   LoadMovieFailureAction |
   RateMovieAction |
   RateMovieSuccessAction |
-  RateMovieFailureAction |
-  StopRandomRateAction |
-  StopRandomRateSuccessAction |
-  StopRandomRateFailureAction;
+  RateMovieFailureAction;

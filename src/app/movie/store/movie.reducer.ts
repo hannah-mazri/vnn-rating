@@ -33,13 +33,18 @@ export function MovieReducer(state: MovieState = initialState, action: MovieActi
         loading: false,
       };
 
+    case MovieActionTypes.RATE_MOVIE:
+      return {
+        ...state,
+        loading: true,
+      };
     case MovieActionTypes.RATE_MOVIE_SUCCESS:
       const idx = state.list.findIndex(item => item.id === action.payload.id);
       const newRating = [...state.list.slice(0, idx), action.payload, ...state.list.slice(idx + 1)];
       return {
         ...state,
         list: newRating.sort((a, b) => b.rating - a.rating),
-        loading: true,
+        loading: false,
       };
     default:
       return state;
