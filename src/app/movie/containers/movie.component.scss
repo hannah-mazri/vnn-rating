@@ -20,27 +20,3 @@
   justify-content: space-between;
   align-items: center;
 }
-
-form {
-  display: flex;
-  flex-direction: row;
-}
-
-form > input {
-  flex-grow: 1;
-  outline: none;
-  padding-left: 4px;
-  border: 0px;
-  height: 20px;
-}
-
-form > button {
-  border: 0px;
-  background: #10ac84;
-  color: white;
-  outline: none;
-
-  &:hover {
-    background: #006266;
-  }
-}

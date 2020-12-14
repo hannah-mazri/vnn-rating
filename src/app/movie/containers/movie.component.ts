@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {interval, Observable, of, Subject, Subscription, timer} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {AppState} from '../store/models/app-state.model';
+import {AppState} from '../../store/models/app-state.model';
 import {map, take, takeUntil, takeWhile} from 'rxjs/operators';
-import {Movie} from '../store/models/movie.model';
-import {LoadMovieAction, RateMovieAction} from '../store/actions/movie.action';
+import {Movie} from '../movie.model';
+import {LoadMovieAction, RateMovieAction} from '../store/movie.action';
 
 @Component({
   selector: 'app-movie-list',

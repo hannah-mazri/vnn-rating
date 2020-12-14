@@ -1,5 +1,5 @@
-import {MovieAction, MovieActionTypes} from '../actions/movie.action';
-import {Movie} from '../models/movie.model';
+import {MovieAction, MovieActionTypes} from './movie.action';
+import {Movie} from '../movie.model';
 
 const initialState: Movie[] = [
   {

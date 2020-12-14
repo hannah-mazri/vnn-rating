@@ -1,5 +1,5 @@
 import {Action, createAction, props} from '@ngrx/store';
-import {Movie} from '../models/movie.model';
+import {Movie} from '../movie.model';
 
 
 export enum MovieActionTypes {

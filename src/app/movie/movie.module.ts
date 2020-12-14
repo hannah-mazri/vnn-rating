@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MovieComponent} from './movie.component';
-import {CoreModule} from '../core/core.module';
+import {MovieComponent} from './containers/movie.component';
 import {SharedModule} from '../shared/shared.module';
 
 
