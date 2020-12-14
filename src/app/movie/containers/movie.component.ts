@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {interval, Observable, of, Subject, Subscription, timer} from 'rxjs';
+import {interval, Observable, Subscription} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {map, take, takeUntil, takeWhile} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Movie} from '../movie.model';
 import {LoadMovieAction, RateMovieAction} from '../store/movie.action';
 import {AppState} from '../../reducers';
@@ -53,10 +53,7 @@ export class MovieComponent implements OnInit {
       map(() => {
         const randomIndex = this.getRandomValue(0, 9);
         const randomRating = this.getRandomValue(1, 5);
-
-        console.log('rand', randomIndex);
         const randomMovie = movies[randomIndex];
-        console.log('rand mov', randomMovie);
 
         this.store.dispatch(new RateMovieAction({ selectedMovie: randomMovie, addedRating: randomRating }));
       })

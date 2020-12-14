@@ -16,7 +16,6 @@ const initialState: MovieState = {
 export function MovieReducer(state: MovieState = initialState, action: MovieAction) {
   switch (action.type) {
     case MovieActionTypes.LOAD_MOVIE:
-      // return [...state.list].sort(((a, b) => b.rating - a.rating));
       return {
         ...state,
         loading: true,
