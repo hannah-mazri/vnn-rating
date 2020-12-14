@@ -8,12 +8,30 @@ h2 {
 }
 
 .bg-dark {
-  //background-color: #000;
-  //border: 1px solid white;
+  background-color: #000;
+  border-bottom: 1px solid #5b1d6e;
 }
 
-.text-light {
-  //color: #fff;
+.text-align-start {
+  text-align: start;
+}
+
+.justify-content-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.border-gray {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-title {
+  color: #fff;
+}
+.text-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: small;
 }
 
 .justify-end {
@@ -48,4 +66,4 @@ h2 {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #5b1d6e; }

@@ -2,61 +2,81 @@
   {
     "id": 0,
     "title": "Sherlock Holmes (2009)",
+    "description": "Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.",
+    "duration": 128,
     "rating": 4.5,
     "numberOfVotes": 1
   },
   {
     "id": 1,
     "title": "Avengers: Endgame",
+    "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+    "duration": 181,
     "rating": 4.8,
     "numberOfVotes": 1
   },
   {
     "id": 2,
-    "title": "Star Wars: The Force Awakens",
+    "title": "Spider-Man: Far from Home",
+    "description": "Following the events of Avengers: Endgame (2019), Spider-Man must step up to take on new threats in a world that has changed forever.",
+    "duration": 129,
     "rating": 4.4,
     "numberOfVotes": 1
   },
   {
     "id": 3,
-    "title": "Skyfall",
-    "rating": 4.6,
+    "title": "Back to the Future",
+    "description": "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown.",
+    "duration": 116,
+    "rating": 4.4,
     "numberOfVotes": 1
   },
   {
     "id": 4,
     "title": "Interstellar",
+    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "duration": 169,
     "rating": 4.6,
     "numberOfVotes": 1
   },
   {
     "id": 5,
     "title": "Knives Out",
+    "description": "A detective investigates the death of a patriarch of an eccentric, combative family.",
+    "duration": 130,
     "rating": 4.8,
     "numberOfVotes": 1
   },
   {
     "id": 6,
-    "title": "Sherlock Holmes (2011)",
+    "title": "Sherlock Holmes: A Game of Shadows",
+    "description": "Detective Sherlock Holmes is on the trail of criminal mastermind Professor Moriarty, who is carrying out a string of random crimes across Europe.",
+    "duration": 129,
     "rating": 4.8,
     "numberOfVotes": 1
   },
   {
     "id": 7,
     "title": "Thor: Ragnarok",
+    "description": "Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela.",
+    "duration": 130,
     "rating": 4.8,
     "numberOfVotes": 1
   },
   {
     "id": 8,
     "title": "Gattaca",
+    "description": "A genetically inferior man assumes the identity of a superior one in order to pursue his lifelong dream of space travel.",
+    "duration": 106,
     "rating": 4.7,
     "numberOfVotes": 1
   },
   {
     "id": 9,
     "title": "Men in Black: International",
-    "rating": 4.4,
+    "description": "The Men in Black have always protected the Earth from the scum of the universe. In this new adventure, they tackle their biggest threat to date: a mole in the Men in Black organization.",
+    "duration": 114,
+    "rating": 4.7,
     "numberOfVotes": 1
   }
 ]

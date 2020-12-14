@@ -13,10 +13,7 @@ export class MovieService {
   }
 
   getFavoriteMovies() {
-    return this.http.get<Movie[]>('../assets/movies.json')
-      .pipe(
-        delay(500)
-      );
+    return this.http.get<Movie[]>('../assets/movies.json');
   }
 
   rateMovie(selectedMovie, addedRating) {

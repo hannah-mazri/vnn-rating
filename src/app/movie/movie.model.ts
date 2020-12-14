@@ -1,8 +1,8 @@
 export interface Movie {
   id?: number;
   title: string;
-  // description: string;
-  rating?: number;
-  newRating: number;
+  description: string;
+  duration: number;
+  rating: number;
   numberOfVotes?: number;
 }
