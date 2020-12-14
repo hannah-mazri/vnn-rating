@@ -60,7 +60,7 @@ const initialState: Movie[] = [
   },
   {
     id: 8,
-    title: 'Gattaca',
+    title: 'Sherlock Holmes (2011)',
     rating: 4.7,
     newRating: 0,
     numberOfVotes: 1

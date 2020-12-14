@@ -1,25 +1,49 @@
 <div id="wrapper">
   <div id="shopping-list">
     <div id="list">
-      <h2>Movie List</h2>
+      <h2 class="mat-background-primary">Movie List</h2>
       <!--      <h2>Game List</h2>-->
       <!--      <h2>App List</h2>-->
 
-      <button mat-raised-button color="accent" (click)="startRandomRate()" *ngIf="showRandomRateButton">Random Rating</button>
-      <button (click)="stopRandomRate()" *ngIf="!showRandomRateButton">Stop Random Rating</button>
-
-      <div class="card mb-3 p-3" *ngFor="let movie of movies | async">
-        {{ movie.title }} with rating of {{ movie.rating }} ({{ movie.numberOfVotes }} votes)
-
-        <app-star-rating
-          [color]="'primary'"
-          [rating]="movie.newRating"
-          [starCount]="5"
-          (ratingUpdated)="onRatingChanged($event)"
-        ></app-star-rating>
-
-        <button mat-raised-button color="accent" (click)="rateMovie(movie, newRating)">Rate Movie</button>
+      <div class="justify-end mb-3">
+        <button mat-raised-button color="accent" (click)="startRandomRate()" *ngIf="showRandomRateButton">Random Rating</button>
+        <button mat-raised-button color="accent" (click)="stopRandomRate()" *ngIf="!showRandomRateButton">Stop Random Rating</button>
       </div>
+
+
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel class="bg-dark" *ngFor="let movie of movies | async; let idx = index" [expanded]="step === idx" (opened)="setStep(idx)" hideToggle>
+          <mat-expansion-panel-header class="jstfy">
+            <mat-panel-title class="text-light">
+              {{ movie.title }}
+            </mat-panel-title>
+            <mat-panel-description class="text-light">
+              <div class="left-group">
+                {{ movie.rating }} / 5 ({{ movie.numberOfVotes }} {{ movie.numberOfVotes > 1 ? 'votes' : 'vote' }})
+              </div>
+
+              <div class="right-group">
+                <mat-icon color="accent">star_outline</mat-icon>
+                <div class="ml-3">Rate This</div>
+              </div>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <app-star-rating
+            class="justify-end mr-3"
+            [color]="'accent'"
+            [rating]="newRating"
+            [starCount]="5"
+            (ratingUpdated)="onRatingChanged($event)"
+          ></app-star-rating>
+
+          <mat-action-row>
+            <button mat-raised-button color="accent" style="margin-right: 24px; padding-left: 24px; padding-right: 24px" (click)="rateMovie(movie, newRating)">Submit</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+      </mat-accordion>
     </div>
   </div>
 </div>

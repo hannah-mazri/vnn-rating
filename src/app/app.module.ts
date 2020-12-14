@@ -20,6 +20,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatSnackBarModule,
     MatFormFieldModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
