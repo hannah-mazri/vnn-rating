@@ -2,14 +2,11 @@
   <div id="shopping-list">
     <div id="list">
       <h2 class="mat-background-primary">Movie List</h2>
-      <!--      <h2>Game List</h2>-->
-      <!--      <h2>App List</h2>-->
 
       <div class="justify-end mb-3">
         <button mat-raised-button color="accent" (click)="startRandomRate()" *ngIf="showRandomRateButton">Random Rating</button>
         <button mat-raised-button color="accent" (click)="stopRandomRate()" *ngIf="!showRandomRateButton">Stop Random Rating</button>
       </div>
-
 
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel class="bg-dark" *ngFor="let movie of movies | async; let idx = index" [expanded]="step === idx" (opened)="setStep(idx)" hideToggle>

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {interval, Observable, of, Subject, Subscription, timer} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {Movie} from '../store/models/movie.model';
 import {AppState} from '../store/models/app-state.model';
-import {LoadMovieAction, RateMovieAction} from '../store/actions/movie.action';
 import {map, take, takeUntil, takeWhile} from 'rxjs/operators';
+import {Movie} from '../store/models/movie.model';
+import {LoadMovieAction, RateMovieAction} from '../store/actions/movie.action';
 
 @Component({
   selector: 'app-movie-list',
@@ -61,7 +61,6 @@ export class MovieComponent implements OnInit {
     this.movies.subscribe(result => myMovies = result);
 
     this.subscription = interval(1000 + (Math.random() * 4000)).pipe(
-      // takeUntil(this.unsubscribed$),
       map(() => {
         this.randomIndex = this.getRandomValue(0, 9);
         randomRating = this.getRandomValue(1, 5);
@@ -78,25 +77,6 @@ export class MovieComponent implements OnInit {
         console.log('copiedList', copiedList);
       })
     ).subscribe();
-
-    // this.loading$ = of(true);
-    // let randomMovie;
-    // const randomIndex = this.getRandomValue(0, 9);
-    // this.movies.subscribe((x) => randomMovie = x[randomIndex]);
-
-    // console.log('random', randomMovie);
-    /*
-    1. const randomMovie = movies[ __randomIndexFromZeroToNine__ ]
-
-    2. const newVoteCount = randomMovie.numberOfVotes + 1
-
-    3. const newRating = (((randomMovie.rating * randomMovie.numberOfVotes) + __randomRatingFromOneToFive__ ) / newVoteCount).toFixed(2)
-     */
-
-    // const newVoteCount = randomMovie.numberOfVotes + 1;
-    // const newRating = (((randomMovie.rating * randomMovie.numberOfVotes) + 5) / newVoteCount).toFixed(2);
-    // const copiedList = {...randomMovie, rating: newRating, numberOfVotes: newVoteCount};
-    // this.store.dispatch(new RateMovieAction(copiedList));
   }
 
   stopRandomRate() {
