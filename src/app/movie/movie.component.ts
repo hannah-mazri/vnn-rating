@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {interval, Observable} from 'rxjs';
+import {interval, Observable, of, timer} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {Movie} from '../store/models/movie.model';
 import {AppState} from '../store/models/app-state.model';
 import {LoadMovieAction, RateMovieAction} from '../store/actions/movie.action';
+import {map, take, takeUntil, takeWhile} from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-list',
@@ -14,11 +15,17 @@ import {LoadMovieAction, RateMovieAction} from '../store/actions/movie.action';
 export class MovieComponent implements OnInit {
 
   movies: Observable<Movie[]>;
+  loading$: Observable<Boolean> = of(false);
   showRandomRateButton = true;
+  randomIndex;
+
 
   newRating = 0;
 
-  constructor(private store: Store<AppState>) { }
+  step = null;
+
+  constructor(private store: Store<AppState>) {
+  }
 
   ngOnInit() {
     this.movies = this.store.select(store => store.movie);
@@ -27,6 +34,12 @@ export class MovieComponent implements OnInit {
   }
 
   // todo: highlight card on rated movie
+
+  onRatingChanged(rating) {
+    console.log(rating);
+    this.newRating = rating;
+  }
+
   rateMovie(selectedMovie, addedRating) {
     const newVoteCount = selectedMovie.numberOfVotes + 1;
     // console.log(`current rating is ${selectedMovie.rating}`);
@@ -35,14 +48,47 @@ export class MovieComponent implements OnInit {
     const newRating = ((((selectedMovie.rating * selectedMovie.numberOfVotes) + addedRating) / newVoteCount).toFixed(2));
     const copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
     this.store.dispatch(new RateMovieAction(copiedList));
+
+    this.step = null;
   }
 
   startRandomRate() {
-    this.showRandomRateButton = false;
+    const timer$ = timer(10000);
     let randomMovie;
-    const randomIndex = this.getRandomValue(0, 9);
-    this.movies.subscribe((x) => randomMovie = x[randomIndex]);
+    let randomRating;
+    let myMovies;
 
+    this.movies.subscribe(result => myMovies = result);
+
+    const myObservable = interval(1000 + (Math.random() * 4000)).pipe(
+      takeUntil(timer$),
+      map(() => {
+        this.randomIndex = this.getRandomValue(0, 9);
+        randomRating = this.getRandomValue(1, 5);
+
+        console.log('rand', this.randomIndex);
+
+        randomMovie = myMovies[this.randomIndex];
+        const newVoteCount = randomMovie.numberOfVotes + 1;
+        const newRating = (((randomMovie.rating * randomMovie.numberOfVotes) + randomRating) / newVoteCount).toFixed(2);
+        const copiedList = {...randomMovie, rating: newRating, numberOfVotes: newVoteCount};
+        this.store.dispatch(new RateMovieAction(copiedList));
+        console.log('random movie', randomMovie);
+        console.log('random rating', randomRating);
+        console.log('copiedList', copiedList);
+      })
+    );
+
+    myObservable.subscribe();
+
+
+    this.showRandomRateButton = false;
+    // this.loading$ = of(true);
+    // let randomMovie;
+    // const randomIndex = this.getRandomValue(0, 9);
+    // this.movies.subscribe((x) => randomMovie = x[randomIndex]);
+
+    // console.log('random', randomMovie);
     /*
     1. const randomMovie = movies[ __randomIndexFromZeroToNine__ ]
 
@@ -58,6 +104,7 @@ export class MovieComponent implements OnInit {
   }
 
   stopRandomRate() {
+    // this.loading$ = of(false);
     this.showRandomRateButton = true;
   }
 
@@ -65,8 +112,8 @@ export class MovieComponent implements OnInit {
     return Math.round(Math.random() * (max - min) + min);
   }
 
-  onRatingChanged(rating) {
-    console.log(rating);
-    this.newRating = rating;
+  setStep(index: number) {
+    this.step = index;
+    this.newRating = null;
   }
 }
