@@ -1,6 +1,5 @@
-import {Action} from '@ngrx/store';
-import {Movie} from '../movie.model';
-
+import { Action } from '@ngrx/store';
+import { Movie } from '../movie.model';
 
 export enum MovieActionTypes {
   LOAD_MOVIE = '[Movie] Load Movie',
@@ -18,38 +17,34 @@ export class LoadMovieAction implements Action {
 export class LoadMovieSuccessAction implements Action {
   readonly type = MovieActionTypes.LOAD_MOVIE_SUCCESS;
 
-  constructor(public payload: Movie[]) {
-  }
+  constructor(public payload: Movie[]) {}
 }
 export class LoadMovieFailureAction implements Action {
   readonly type = MovieActionTypes.LOAD_MOVIE_FAILURE;
 
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
 export class RateMovieAction implements Action {
   readonly type = MovieActionTypes.RATE_MOVIE;
 
-  constructor(public payload: { selectedMovie: Movie, addedRating: number }) {
-  }
+  constructor(public payload: { selectedMovie: Movie, addedRating: number }) {}
 }
 export class RateMovieSuccessAction implements Action {
   readonly type = MovieActionTypes.RATE_MOVIE_SUCCESS;
 
-  constructor(public payload: Movie) {
-  }
+  constructor(public payload: Movie) {}
 }
 export class RateMovieFailureAction implements Action {
   readonly type = MovieActionTypes.RATE_MOVIE_FAILURE;
 
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
-export type MovieAction = LoadMovieAction |
-  LoadMovieSuccessAction |
-  LoadMovieFailureAction |
-  RateMovieAction |
-  RateMovieSuccessAction |
-  RateMovieFailureAction;
+export type MovieAction =
+  | LoadMovieAction
+  | LoadMovieSuccessAction
+  | LoadMovieFailureAction
+  | RateMovieAction
+  | RateMovieSuccessAction
+  | RateMovieFailureAction;

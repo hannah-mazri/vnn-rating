@@ -1,16 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {of} from 'rxjs';
-import {Movie} from '../movie/movie.model';
-import {delay} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { Movie } from '../movie/movie.model';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieService {
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getFavoriteMovies() {
     return this.http.get<Movie[]>('../assets/movies.json');
@@ -18,8 +16,12 @@ export class MovieService {
 
   rateMovie(selectedMovie, addedRating) {
     const newVoteCount = selectedMovie.numberOfVotes + 1;
-    const newRating = ((((selectedMovie.rating * selectedMovie.numberOfVotes) + addedRating) / newVoteCount).toFixed(2));
-    const copiedList = {...selectedMovie, rating: newRating, numberOfVotes: newVoteCount};
+    const newRating = ((selectedMovie.rating * selectedMovie.numberOfVotes + addedRating) / newVoteCount).toFixed(2);
+    const copiedList = {
+      ...selectedMovie,
+      rating: newRating,
+      numberOfVotes: newVoteCount,
+    };
 
     return of(copiedList).pipe(delay(500));
   }

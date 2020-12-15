@@ -1,5 +1,5 @@
-import {MovieAction, MovieActionTypes} from './movie.action';
-import {Movie} from '../movie.model';
+import { MovieAction, MovieActionTypes } from './movie.action';
+import { Movie } from '../movie.model';
 
 export interface MovieState {
   list: Movie[];
@@ -13,7 +13,10 @@ const initialState: MovieState = {
   error: undefined,
 };
 
-export function MovieReducer(state: MovieState = initialState, action: MovieAction) {
+export function MovieReducer(
+  state: MovieState = initialState,
+  action: MovieAction
+) {
   switch (action.type) {
     case MovieActionTypes.LOAD_MOVIE:
       return {
@@ -23,7 +26,7 @@ export function MovieReducer(state: MovieState = initialState, action: MovieActi
     case MovieActionTypes.LOAD_MOVIE_SUCCESS:
       return {
         ...state,
-        list: [...action.payload].sort(((a, b) => b.rating - a.rating)),
+        list: [...action.payload].sort((a, b) => b.rating - a.rating),
         loading: false,
       };
     case MovieActionTypes.LOAD_MOVIE_FAILURE:
@@ -38,8 +41,12 @@ export function MovieReducer(state: MovieState = initialState, action: MovieActi
         loading: true,
       };
     case MovieActionTypes.RATE_MOVIE_SUCCESS:
-      const idx = state.list.findIndex(item => item.id === action.payload.id);
-      const newRating = [...state.list.slice(0, idx), action.payload, ...state.list.slice(idx + 1)];
+      const idx = state.list.findIndex((item) => item.id === action.payload.id);
+      const newRating = [
+        ...state.list.slice(0, idx),
+        action.payload,
+        ...state.list.slice(idx + 1),
+      ];
       return {
         ...state,
         list: [...newRating.sort((a, b) => b.rating - a.rating)],

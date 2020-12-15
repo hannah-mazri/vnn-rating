@@ -1,20 +1,43 @@
 <div class="justify-content-space-between mb-3">
   <h2>{{ title }}</h2>
-  <button mat-raised-button color="accent" (click)="startRandomRate()" *ngIf="!isRandomRating">Random Rating</button>
-  <button mat-raised-button color="accent" (click)="stopRandomRate()" *ngIf="isRandomRating">Stop Random Rating</button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="startRandomRate()"
+    *ngIf="!isRandomRating"
+  >
+    Random Rating
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="stopRandomRate()"
+    *ngIf="isRandomRating"
+  >
+    Stop Random Rating
+  </button>
 </div>
 
 <mat-accordion class="example-headers-align">
-  <mat-expansion-panel class="bg-dark border-purple" *ngFor="let movie of (movies$ | async); let idx = index" [expanded]="step === idx" (opened)="setStep(idx)" hideToggle>
-    <mat-expansion-panel-header class="movie" [class.loading]="(loading$ | async)">
+  <mat-expansion-panel
+    class="bg-dark border-purple"
+    *ngFor="let movie of movies$ | async; let idx = index"
+    [expanded]="step === idx"
+    (opened)="setStep(idx)"
+    hideToggle
+  >
+    <mat-expansion-panel-header
+      class="movie"
+      [class.loading]="loading$ | async"
+    >
       <mat-panel-title class="text-title">
         {{ movie.title }}
       </mat-panel-title>
       <mat-panel-description class="text-description">
         <div class="left-group">
-          {{ movie.rating }} / 5 ({{ movie.numberOfVotes }} {{ movie.numberOfVotes > 1 ? 'votes' : 'vote' }})
+          {{ movie.rating }} / 5 ({{ movie.numberOfVotes }}
+          {{ movie.numberOfVotes > 1 ? 'votes' : 'vote' }})
         </div>
-
         <div class="right-group ml-3">
           <mat-icon color="accent">star_outline</mat-icon>
           <div class="ml-3">Rate This</div>
@@ -35,7 +58,14 @@
     <div class="text-description text-align-start">{{ movie.description }}</div>
 
     <mat-action-row class="border-gray">
-      <button mat-raised-button color="accent" style="margin-right: 24px; padding-left: 24px; padding-right: 24px" (click)="rateMovie(movie, newRating)">Submit</button>
+      <button
+        mat-raised-button
+        color="accent"
+        style="margin-right: 24px; padding-left: 24px; padding-right: 24px"
+        (click)="rateMovie(movie, newRating)"
+      >
+        Submit
+      </button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
