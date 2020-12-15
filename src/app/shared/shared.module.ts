@@ -10,6 +10,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {StarRatingComponent} from './components/star-rating/star-rating.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const MATERIAL_MODULE = [
   MatSliderModule,
@@ -21,6 +24,9 @@ const MATERIAL_MODULE = [
   MatExpansionModule,
   MatDividerModule,
   MatDatepickerModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatMenuModule,
 ];
 
 

@@ -1,37 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {interval, Observable, Subscription} from 'rxjs';
-import {Store} from '@ngrx/store';
+import {Component, Input, OnInit} from '@angular/core';
+import {RateMovieAction} from '../store/movie.action';
+import {interval, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Movie} from '../movie.model';
-import {LoadMovieAction, RateMovieAction} from '../store/movie.action';
+import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 
 @Component({
   selector: 'app-movie-list',
-  templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.scss']
+  templateUrl: './movie-list.component.html',
+  styleUrls: ['./movie-list.component.scss']
 })
+export class MovieListComponent implements OnInit {
+  @Input() movies$;
+  @Input() loading$;
+  @Input() title;
 
-export class MovieComponent implements OnInit {
-
-  movies$: Observable<Movie[]>;
-  loading$: Observable<boolean>;
-  error$: Observable<Error>;
   subscription: Subscription;
-
   isRandomRating = false;
   newRating = 0;
   step = null;
 
-  constructor(private store: Store<AppState>) {
-  }
+  constructor(private store: Store<AppState>) { }
 
-  ngOnInit() {
-    this.movies$ = this.store.select(store => store.movie.list);
-    this.loading$ = this.store.select(store => store.movie.loading);
-    this.error$ = this.store.select(store => store.movie.error);
-
-    this.store.dispatch(new LoadMovieAction());
+  ngOnInit(): void {
   }
 
   onRatingChanged(rating) {
@@ -45,6 +36,7 @@ export class MovieComponent implements OnInit {
 
   startRandomRate() {
     this.isRandomRating = true;
+    this.step = null;
 
     let movies;
     this.movies$.subscribe(result => movies = result);

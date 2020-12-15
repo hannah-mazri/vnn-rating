@@ -1,0 +1,12 @@
+<mat-toolbar class="position-fixed justify-content-space-between">
+  <div>hannah.fav</div>
+  <a [routerLink]="['/']" class="font-size-medium link">movies</a>
+</mat-toolbar>
+
+<div id="wrapper">
+  <div id="shopping-list">
+    <div id="list">
+      <app-movie-list [movies$]="movies$" [loading$]="loading$" [title]="title"></app-movie-list>
+    </div>
+  </div>
+</div>
