@@ -31,7 +31,6 @@ import {MovieEffects} from './movie/store/movie.effect';
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
 
     SharedModule,
-    MovieModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

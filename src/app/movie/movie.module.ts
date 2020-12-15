@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MovieComponent} from './pages/movie.component';
 import {SharedModule} from '../shared/shared.module';
 import {MovieListComponent} from './components/movie-list.component';
-import {RouterModule} from '@angular/router';
+import {MovieRoutingModule} from './movie-routing.module';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import {RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    MovieRoutingModule
   ]
 })
 export class MovieModule { }
