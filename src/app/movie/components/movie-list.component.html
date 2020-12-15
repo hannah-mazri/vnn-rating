@@ -57,7 +57,7 @@
     </div>
     <div class="text-description text-align-start">{{ movie.description }}</div>
 
-    <mat-action-row class="border-gray">
+    <mat-action-row class="border-gray" *ngIf="newRating">
       <button
         mat-raised-button
         color="accent"

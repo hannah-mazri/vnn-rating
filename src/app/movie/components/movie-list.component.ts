@@ -20,7 +20,7 @@ export class MovieListComponent implements OnInit {
   isRandomRating = false;
   newRating = 0;
   step = null;
-  snackBarDuration = 1000;
+  snackBarDuration = 1200;
 
   constructor(private store: Store<AppState>, private snackBar: MatSnackBar) {}
 
@@ -43,7 +43,7 @@ export class MovieListComponent implements OnInit {
     let movies;
     this.movies$.subscribe((result) => (movies = result));
 
-    this.subscription = interval(1000 + Math.random() * 4000)
+    this.subscription = interval(2000 + Math.random() * 4000)
       .pipe(
         map(() => {
           const randomIndex = this.getRandomValue(0, 9);
