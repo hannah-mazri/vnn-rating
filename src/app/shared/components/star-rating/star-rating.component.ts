@@ -32,9 +32,6 @@ export class StarRatingComponent implements OnInit {
   }
 
   onClick(rating: number) {
-    // this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
-    //   duration: this.snackBarDuration
-    // });
     this.ratingUpdated.emit(rating);
     return false;
   }

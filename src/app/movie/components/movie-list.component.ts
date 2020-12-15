@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie-list',
@@ -19,8 +20,9 @@ export class MovieListComponent implements OnInit {
   isRandomRating = false;
   newRating = 0;
   step = null;
+  snackBarDuration = 1000;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
@@ -29,6 +31,7 @@ export class MovieListComponent implements OnInit {
   }
 
   rateMovie(selectedMovie, addedRating) {
+    this.openSnackbar(selectedMovie, addedRating);
     this.store.dispatch(new RateMovieAction({ selectedMovie, addedRating }));
     this.step = null;
   }
@@ -46,6 +49,7 @@ export class MovieListComponent implements OnInit {
           const randomIndex = this.getRandomValue(0, 9);
           const randomRating = this.getRandomValue(1, 5);
           const randomMovie = movies[randomIndex];
+          this.openSnackbar(randomMovie, randomRating);
 
           this.store.dispatch(
             new RateMovieAction({
@@ -65,6 +69,13 @@ export class MovieListComponent implements OnInit {
 
   getRandomValue(min, max) {
     return Math.round(Math.random() * (max - min) + min);
+  }
+
+  openSnackbar(selectedMovie, addedRating) {
+    this.snackBar.open(`You rated ${ selectedMovie.title } with ${ addedRating } / 5`, '', {
+      duration: this.snackBarDuration,
+      panelClass: ['snackbar-purple']
+    });
   }
 
   setStep(index: number) {

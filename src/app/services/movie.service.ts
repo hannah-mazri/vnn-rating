@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Movie } from '../movie/movie.model';
-import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +22,6 @@ export class MovieService {
       numberOfVotes: newVoteCount,
     };
 
-    return of(copiedList).pipe(delay(500));
+    return of(copiedList);
   }
 }
